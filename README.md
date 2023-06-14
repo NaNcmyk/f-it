@@ -35,6 +35,8 @@ Key JS Topics:
 
 Good luck. You got this ⌨️💪.
 
+<br>
+
 #### 💪 **LEVEL 1**
 If you do not know the ABC's of ASL, this foundation class is designed for you. Experienced signers, feel free to use this as a warm-up.  
 
@@ -79,17 +81,18 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 1. 📂 *assets* (one subfolder + 4 image files):  
    + 📂 *alphabet* folder (26 *svg* files, one for each ASL alphabet) - All are from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Fingerspelling) by [WPClipart](https://www.wpclipart.com/sign_language/American_ABCs/index.html).  
    + *binary_swirl.png* - from [Pixabay](https://pixabay.com/vectors/binary-random-numbers-digital-ones-1254482/) by [GDJ](https://pixabay.com/users/gdj-1086657/)  
-   + logos (*logo32.png* & *logo256.png*) - from [Flaticon](https://www.flaticon.com/free-icon/easy-to-use_4456893) by [Freepik](https://www.flaticon.com/authors/freepik)  
+   + logos (*logo32.png* & *logo256.png*) - both from [Flaticon](https://www.flaticon.com/free-icon/easy-to-use_4456893) by [Freepik](https://www.flaticon.com/authors/freepik)  
    + *power-finger.gif* - from [GIPHY](https://giphy.com/gifs/money-twitter-tweet-3IUZ9PpKfTEUQNb4od) by [Antony Hare](https://giphy.com/antonyhare/)
 
 <br>
 
-2. 📂 *scripts* (5 *.js* files):  
-   + *alphabet.js* - used by *level1.html*   
+2. 📂 *scripts* (5 *.js* files): 
+   + *alphabet.js* - used by *level1.html* 
+      + The `Popover.js` & `bootstrap.min.js` scripts are also included in *level1.html* to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
    + *copyright.js* - used by all 4 *.html* files  
    + *speller.js* - used by *level2.html*  
    + *video.js* - used by *level3.html*  
-   + *yellow.js* - used by all 4 *.html* files   
+   + *yellow.js* - used by all 4 *.html* files
 
 <br>
 
@@ -98,4 +101,6 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
     + *index.css* - used by *index.html*
     + *level1.css* - used by *level1.html*
     + *level2.css* - used by *level2.html*
+      + *start* button is styled with Bootstrap.
     + *level3.css* - used by *level3.html*
+      + *watch live demo* buttons are styled with Bootstrap.
