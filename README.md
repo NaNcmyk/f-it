@@ -42,16 +42,11 @@ If you do not know the ABC's of ASL, this foundation class is designed for you. 
 
 ⚠️ *You'll need your keyboard for this, touchscreen users.*
 
-<br>
-
 #### 💪 **LEVEL 2**
 Once you have mastered the fundamentals, you can move on to SPELLING in ASL. You'll be completing your sets ([time under tension](https://www.healthline.com/health/exercise-fitness/time-under-tension)) while...*timed under tension*. Don't uhhh...F-it up.  
 
 + **AMRAP** (as many reps as possible) - Test how many times you can fingerspell a single word within the alloted 20,000-millisecond (20-second) timeframe. Timer starts as soon as the page loads--no time to lose! (If you get caught off guard--no worries. Wait for the next word to pop up on screen. The exercise changes every 20 seconds.)
 + **EMOM** (every minute on the minute) - You'll be presented with a set of 12 fingerspelling exercises to complete for one minute, at intervals of five seconds per word. Words are selected at random. The one-minute timer starts as soon as you hit the *start* button. The EMOM has no set duration. We recommend repeating each one-minute block [3-5 times](https://twitter.com/hubermanlab/status/1553501345084166144?lang=en) to really build up that muscle memory.
-
-
-<br>
 
 #### 💪 **LEVEL 3**
 For fluent ASL signers only. Think: karaoke, but...for your fingers. Can you keep up?! No singing 🚫🎤 required unless...you really want to.
@@ -86,11 +81,15 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 
 <br>
 
-2. 📂 *scripts* (5 *.js* files): 
+2. 📂 *scripts* (6 *.js* files): 
    + *alphabet.js* - used by *level1.html* 
+      + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
       + The `Popover.js` & `bootstrap.min.js` scripts are also included in *level1.html* to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
-   + *copyright.js* - used by all 4 *.html* files  
+   + *copyright.js* - used by all 4 *.html* files
+      + Programmatically generates the copyright year and footer text.   
    + *speller.js* - used by *level2.html*  
+   + *swirl.js* - used by *index.html*
+      + Controls the swirl animation when homepage loads.   
    + *video.js* - used by *level3.html*  
    + *yellow.js* - used by all 4 *.html* files
 
