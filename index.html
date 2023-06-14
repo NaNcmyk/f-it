@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/assets/logo32.png">
+
+    <title>f-it.</title>
+</head>
+
+<body>
+    <!-- swirl animation -->
+    <div class="swirl"></div>
+
+    <!-- header -->
+    <header class="heading-container">
+        <img src="/assets/logo256.png" alt="logo">
+        <span class="heading-text">
+            <h1>f-it.</h1>
+            <small>high-intensity interval training <br>for programmers</small>
+        </span>
+    </header>
+
+    <!-- nav -->
+    <nav class="nav-container">
+        <div class="triangle">
+
+            <ul class="nav-link-container">
+                <li class="link-list-item">
+                    <a href="/level1.html">
+                        <i class="fas fa-fist-raised"></i>
+                        level 1
+                    </a>
+                </li>
+                <li class="link-list-item">
+                    <a href="/level2.html">
+                        <i class="fas fa-fist-raised"></i>
+                        level 2
+                    </a>
+                </li>
+                <li class="link-list-item">
+                    <a href="/level3.html">
+                        <i class="fas fa-fist-raised"></i>
+                        level 3
+                        <a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- main content -->
+    <div class="pattern-bg stripes">
+        <div class="content-blob">
+            <div class="content-div">
+                <h3>ready?</h3>
+                <p>power up your fingers.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pattern-bg polka-dots">
+        <div class="content-blob">
+            <div class="content-div">
+                <h3>set...</h3>
+                <p>show those bugs no mercy.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pattern-bg zig-zag">
+        <div class="content-blob">
+            <div class="content-div">
+                <h3 class="fast">GO!</h3>
+                <img src="/assets/power-finger.gif" alt="power finger">
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer"></footer>
+
+    <!-- custom script -->
+    <script src="/scripts/yellow.js"></script>
+    <script>
+        // show swirl animation when page loads
+        const background = document.querySelector('.swirl');
+        window.onload = () => {
+            background.style.opacity = 0;
+            background.style.transform = 'scale(8) rotate(180deg)';
+        }
+    </script>
+    <script src="/scripts/copyright.js"></script>
+
+</body>
+
+</html>

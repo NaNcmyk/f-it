@@ -1,0 +1,334 @@
+body {
+    position: relative;
+    font-family: 'Press Start 2P', monospace;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --------------header------------ */
+
+.heading-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 1.6rem 0 1.5rem .8rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.heading-container.yellow {
+    background-color: yellow;
+}
+
+.heading-container img {
+    width: 100px;
+    height: 100px;
+    margin: 0 1rem;
+    cursor: pointer;
+}
+
+.heading-container img:active {
+    transform: scale(.9);
+}
+
+.heading-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading-text h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.heading-text small {
+    margin: 0;
+    padding: 0;
+    padding-left: 1.2rem;
+    font-size: 1rem;
+    text-align: left;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* ------------ nav triangle ----------- */
+
+.nav-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+/* .nav-link-container>.link-list-item.home {
+    display: none;
+} */
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 30rem 20rem 0 20rem;
+    border-color: #000 transparent transparent transparent;
+}
+
+.triangle .nav-link-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 34%;
+    right: 18%;
+    transform: translate(-50%, -50%);
+    list-style-type: none;
+}
+
+.triangle li {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.triangle a {
+    color: #fff;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+
+.triangle a:hover {
+    color: yellow;
+}
+
+.triangle .fa-fist-raised {
+    font-size: 1.7rem;
+}
+
+.triangle li:active {
+    transform: scale(.9);
+}
+
+/* ----------- main content ------------ */
+
+.pattern-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+/* https://stripesgenerator.com/ */
+.pattern-bg.stripes {
+    background-image: linear-gradient(120deg, #fff 25%, #000 25%, #000 50%, #fff 50%, #fff 75%, #000 75%, #000 100%);
+    background-size: 23.09px 40.00px;
+}
+
+.pattern-bg.stripes.yellow {
+    background-image: linear-gradient(120deg, yellow 25%, #000 25%, #000 50%, #fff 50%, #fff 75%, #000 75%, #000 100%);
+    background-size: 23.09px 40.00px;
+}
+
+/* pattern from: https://projects.verou.me/css3patterns/#polka-dot */
+.pattern-bg.polka-dots {
+    background-color: #fff;
+    background-image: radial-gradient(#000 15%, transparent 16%),
+        radial-gradient(#000 15%, transparent 16%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+}
+
+.pattern-bg.polka-dots.yellow {
+    background-image: radial-gradient(yellow 15%, transparent 16%),
+        radial-gradient(#000 15%, transparent 16%);
+}
+
+/* pattern from: https://projects.verou.me/css3patterns/#stairs */
+.pattern-bg.zig-zag {
+    background:
+        linear-gradient(63deg, #000 23%, transparent 23%) 7px 0,
+        linear-gradient(63deg, transparent 74%, #000 78%),
+        linear-gradient(63deg, transparent 34%, #000 38%, #000 58%, transparent 62%),
+        #fff;
+    background-size: 16px 48px;
+}
+
+.pattern-bg.zig-zag.yellow {
+    background:
+        linear-gradient(63deg, #000 23%, transparent 23%) 7px 0,
+        linear-gradient(63deg, transparent 74%, #000 78%),
+        linear-gradient(63deg, transparent 34%, #000 38%, yellow 58%, transparent 62%),
+        #fff;
+    background-size: 16px 48px;
+}
+
+.content-blob {
+    position: relative;
+    bottom: -12%;
+    background-color: #fff;
+    min-width: 320px;
+    width: 90%;
+    height: 70%;
+    margin: 0 auto;
+    border-radius: 13% 87% 34% 66% / 54% 49% 51% 46%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    z-index: 1;
+}
+
+.content-blob.yellow {
+    background-color: yellow;
+}
+
+.content-div {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    top: 50%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+}
+
+.content-div h3 {
+    font-size: 2.5rem;
+}
+
+.content-div h3.fast {
+    font-size: 6rem;
+    font-family: 'Faster One', monospace;
+    letter-spacing: 1.3rem;
+}
+
+.content-div p {
+    padding-top: 1rem;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.3rem;
+}
+
+.content-div img[alt="power finger"] {
+    width: 65%;
+    transform: scaleX(-1) rotate(20deg) translateY(-5rem);
+    border-radius: 86% 14% 72% 28% / 22% 38% 62% 78%;
+}
+
+.content-blob.yellow .content-div img[alt="power finger"] {
+    display: none;
+}
+
+/* ---------------- footer --------------- */
+.footer {
+    padding: .6rem 0;
+    font-size: .5rem;
+    text-align: center;
+}
+
+.footer.yellow {
+    background-color: yellow;
+}
+
+/* ------------- media queries ------------- */
+@media (max-width: 1060px) {
+    .triangle {
+        border-width: 30rem 10rem 0 10rem;
+    }
+
+    .triangle .nav-link-container {
+        top: 25%;
+        right: 0;
+    }
+
+    .triangle a {
+        font-size: 1rem;
+    }
+
+    .triangle .fa-fist-raised {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 810px) {
+    .heading-container {
+        padding: 2rem 0 2rem 1rem;
+    }
+
+    .heading-container img {
+        width: 60px;
+        height: 60px;
+        margin-left: 0;
+    }
+
+    .heading-text {
+        display: none;
+    }
+
+    .content-blob {
+        bottom: -9%;
+    }
+}
+
+@media (max-width: 650px) {
+    .triangle {
+        border-width: 18rem 10rem 0 10rem;
+    }
+
+    .triangle .nav-link-container {
+        top: 28%;
+        right: 3%;
+    }
+
+    .triangle a {
+        font-size: .9rem;
+    }
+
+    .triangle .fa-fist-raised {
+        font-size: 1.1rem;
+    }
+
+    .content-div img[alt="power finger"] {
+        transform: rotate(80deg) translateY(-10deg);
+    }
+}
+
+@media (max-width: 450px) {
+    .triangle {
+        border-width: 16rem 8rem 0 8rem;
+    }
+
+    .triangle .nav-link-container {
+        top: 26%;
+        right: -2%;
+    }
+
+    .triangle .nav-link-container-home {
+        top: 20%;
+    }
+
+    .triangle a {
+        font-size: .8rem;
+    }
+
+    .triangle .fa-fist-raised {
+        font-size: 1rem;
+    }
+
+    .content-div h3 {
+        font-size: 2rem;
+    }
+
+    .content-div h3.fast {
+        font-size: 4rem;
+        letter-spacing: 1rem;
+    }
+
+    .content-div img[alt="power finger"] {
+        transform: rotate(60deg);
+    }
+
+}

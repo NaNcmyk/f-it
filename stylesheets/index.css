@@ -1,0 +1,24 @@
+.swirl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #fff;
+    background-image: url(/assets/binary_swirl.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+    transition: opacity 2s ease-out, transform 2s ease-out;
+    z-index: 200;
+    pointer-events: none;
+}
+
+.heading-container img {
+    cursor: default;
+}
+
+.heading-container img:active {
+    transform: scale(1);
+}
