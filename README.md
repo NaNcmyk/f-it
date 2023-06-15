@@ -35,8 +35,6 @@ Key JS Topics:
 
 Good luck. You got this ⌨️💪.
 
-<br>
-
 #### 💪 **LEVEL 1**
 If you do not know the ABC's of ASL, this foundation class is designed for you. Experienced signers, feel free to use this as a warm-up.  
 
@@ -82,16 +80,59 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 <br>
 
 2. 📂 *scripts* (6 *.js* files): 
-   + *alphabet.js* - used by *level1.html* 
+   + `alphabet.js` - used by `level1.html` 
       + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
-      + The `Popover.js` & `bootstrap.min.js` scripts are also included in *level1.html* to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
-   + *copyright.js* - used by all 4 *.html* files
+      + The `Popover.js` & `bootstrap.min.js` scripts are also included in `level1.html` to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
+   + `copyright.js` - used by all 4 *.html* files
       + Programmatically generates the copyright year and footer text.   
-   + *speller.js* - used by *level2.html*  
-   + *swirl.js* - used by *index.html*
+   + `speller.js` - used by `level2.html`
+      + This script contains 7 functions:  
+         1. `getRandomInteger`
+            + This is a helper function for `pickWord`.
+            + Returns a random integer based on a specified range. Accepts two arguments: 
+               + the min value within the range
+               + the max value within the range
+         2. `pickWord`
+            + This is a helper function for `updateContent`.
+            + Calls `getRandomInteger` to get a random index number.
+            + Returns an array of characters (single-letter strings) that make up a randomly chosen word from the `words` array--using a random number from `getRandomInteger` to index into it.
+         3. `getASLImages`
+            + This is another helper function for `updateContent`.
+            + Returns a container `<div>` that holds the ASL *svg* equivalent of each character in the `wordArr` argument. 
+            + An `<img>` element is created for each character in the word array, then appended to the container `<div>`. 
+            + File paths to the *svgs* are stored in the `alphabets` object, and are accessible by the alphabet key that matches the file name. 
+               + E.g., The property name used to access the path to the *a.svg* file in the `alphabets` object, for ASL letter 'A' is--"a".
+            + The *svg*s, together, inside the container `<div>`, spell out the joined characters of `wordArr`--in ASL.
+            + Once the text is translated to image, this function removes all previous images from the DOM--based on its `containerEL` and `num` arguments.
+               + The `num` argument tells the function to remove `containerEL`'s second child if `containerEL` is the AMRAP `<div>`, but its
+              third child if the EMOM `<div>`.
+         4. `getImgCaption`
+            + This is yet another helper function for `updateContent`.
+            + Returns a `<p>` element containing the "fingerspell [joined characters from word array]" caption under the ASL images.
+            + Once the new caption text has been created, this function removes the previous caption from the DOM--based on its `containerEL` and `num` arguments.
+               + The `num` argument tells the function to remove `containerEL`'s third child if `containerEL` is the AMRAP `<div>`, but its 
+              fourth child if the EMOM `<div>`.
+         5. `updateContent` 
+            + Accepts three arguments:  
+              1. `containerEl` (HTML element) - This is the parent element of both the ASL images and caption text. Since we have two different `<div>`'s that need to be updated, we need a way to reference the AMRAP and EMOM `<div>`s to know which to update.
+              2. `childElNum1` (integer) - This is the image container `<div>`'s index number in the `containerEl`'s `children` property, used by `getASLImages` to identify which child element needs to be removed from the DOM when a new set of images has been created to replace it.
+              3. `childElNum2` (integer) - This is the `<p>` element's index number in the `containerEl` 's `children` property, used by `getImgCaption` to identify which child element needs to be removed from the DOM when a new caption has been created to replace it.
+            + Calls the `pickWord`, `getASLImages`, and `getImgCaption` functions.
+              + `pickWord` - its return value (an array of characters) is passed in to both `getASLImages` and `getImgCaption` for processing.
+              + `getASLImages` - `childElNum1` and `containerEl` are also passed in as arguments.
+              + `getImgCaption` - `childElNum2` and `containerEl` are also passed in as arguments.
+            + Lastly, this function appends the new content (namely, the return values of `getASLImages` and `getImgCaption`) to the DOM.
+         6. `startEmom`
+            + This is the `click` event handler for the EMOM *start* button. 
+            + Sets up a timer using `setTimeout` to display a new ASL word and caption every five seconds--using `setInterval` to call `updateContent`--for one minute.
+         7. `startAmrap`
+            + This function calls `updateContent` to generate a new ASL word and caption every 20,000ms using `setInterval`--only for as long as the page remains open and visible in both the current browser tab and browser window.
+            + When a change in the page's `visibilityState` is detected, a page reload will be required to reset the interval if it was cleared by either minimizing the window or by switching browser tabs.
+   + `swirl.js` - used by `index.html`
       + Controls the swirl animation when homepage loads.   
-   + *video.js* - used by *level3.html*  
-   + *yellow.js* - used by all 4 *.html* files
+   + `video.js` - used by `level3.html`  
+   + `yellow.js` - used by all 4 *.html* files
+      + Controls the yellow hover effect that appears over the page, on hover over any of the three links (*level 1*, *level 2*, *level 3*) inside the triangle-shaped navigation.
 
 <br>
 

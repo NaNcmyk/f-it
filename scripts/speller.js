@@ -56,14 +56,14 @@ const words = [
     'zap'
 ]
 
-const contentDiv = document.querySelector('.stripes .content-div');
-const contentDiv2 = document.querySelector('.polka-dots .content-div');
+const amrapDiv = document.querySelector('.stripes .content-div');
+const emomDiv = document.querySelector('.polka-dots .content-div');
 const emomButton = document.querySelector('button');
 
 // get random integer
 function getRandomInteger(min, max) {
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
 //  choose random word from words array, split word into an array of chars
 function pickWord() {
@@ -73,81 +73,86 @@ function pickWord() {
     return arr;
 }
 
-// turn letters of randomly chosen AMRAP word into its ASL equivalent
-function convertAmrapWord() {
-    // create word container div
+// turn letters of randomly chosen word into their ASL equivalent
+function getASLImages(containerEl, wordArr, num) {
+    // create container to store ASL images
     const wordContainer = document.createElement('div');
     wordContainer.classList.add('word-container');
-    
-     // generate images for each letter of word, add images to word container
-    let amrapWord = pickWord();
-    amrapWord.forEach(letter => {
+
+    // generate image element for each letter of word
+    // add images to word container
+    wordArr.forEach(letter => {
         if (letter !== '-') {
-            let img = document.createElement('img'); 
+            let img = document.createElement('img');
             img.src = `${alphabets[letter]}`;
-            wordContainer.appendChild(img);    
+            wordContainer.appendChild(img);
         }
     });
-    // remove previous display
-    while (contentDiv.children[2]) {
-        contentDiv.removeChild(contentDiv.children[2]);
+
+    // remove previous images from DOM
+    while (containerEl.children[num]) {
+        containerEl.removeChild(containerEl.children[num]);
     }
-    
-    // generate caption
-    let text = document.createElement('p');
-    text.innerHTML = `fingerspell <i>${amrapWord.join('')}</i>`;
-    // remove previous display
-    while (contentDiv.children[3]) {
-        contentDiv.removeChild(contentDiv.children[3]);
-    }
-    // add word container and caption to DOM
-    contentDiv.append(wordContainer, text);
+
+    return wordContainer;
 }
 
-// turn letters of randomly chosen EMOM word into its ASL equivalent
-function convertEmomWord() {
-    // create word container div
-    const wordContainer2 = document.createElement('div');
-    wordContainer2.classList.add('word-container2');
-    
-    // generate images for each letter of word, add images to word container
-    let emomWord = pickWord();
-    emomWord.forEach(letter => {
-        if (letter !== '-') {
-            let img = document.createElement('img'); 
-            img.src = `${alphabets[letter]}`;
-            wordContainer2.appendChild(img);    
-        }
-    });
-    // remove previous display
-    while (contentDiv2.children[3]) {
-        contentDiv2.removeChild(contentDiv2.children[3]);
-    }
-    // generate caption
+function getImgCaption(containerEl, wordArr, num) {
+    // create paragraph element for caption text
     let text = document.createElement('p');
-    text.innerHTML = `fingerspell <i>${emomWord.join('')}</i>`;
-    // remove previous display
-    while (contentDiv2.children[4]) {
-        contentDiv2.removeChild(contentDiv2.children[4]);
+    text.innerHTML = `fingerspell <i>${wordArr.join('')}</i>`;
+
+    // remove previous caption from DOM
+    while (containerEl.children[num]) {
+        containerEl.removeChild(containerEl.children[num]);
     }
-    // add word container and caption to DOM
-    contentDiv2.append(wordContainer2, text);
+
+    return text;
 }
 
-// set one-minute timer for EMOM
+function updateContent(containerEl, childElNum1, childElNum2) {
+    let wordArr = pickWord();
+
+    // generate new content
+    const wordContainer = getASLImages(containerEl, wordArr, childElNum1);
+    const text = getImgCaption(containerEl, wordArr, childElNum2);
+
+    // add word container and caption to DOM
+    containerEl.append(wordContainer, text);
+}
+
 function startEmom() {
     emomButton.style.display = 'none';
-    convertEmomWord();
-    let emom = setInterval(convertEmomWord, 5000);
+
+    // change content for children 3 & 4 of container element
+    updateContent(emomDiv, 3, 4);
+
+    // display each new word every five seconds
+    let emom = setInterval(() => updateContent(emomDiv, 3, 4), 5000);
+
+    // set one-minute timer for EMOM
     setTimeout(() => {
         clearInterval(emom);
-        contentDiv2.children[3].style.display = 'none';
-        contentDiv2.children[4].style.display = 'none';
+        emomDiv.children[3].style.display = 'none';
+        emomDiv.children[4].style.display = 'none';
         emomButton.style.display = 'inline-block';
     }, 60000);
 }
 
-convertAmrapWord();
-setInterval(convertAmrapWord, 20000);
+function startAmrap() {
+    // change content for children 2 & 3 of container element
+    updateContent(amrapDiv, 2, 3);
+    const amrap = setInterval(() => updateContent(amrapDiv, 2, 3), 20000);
+
+    // clear interval if page is no longer visible (e.g., user navigates away from page, minimizes window, or switches to new tab in same browser)
+    // otherwise intervals will run in an infinite loop
+    document.onvisibilitychange = () => {
+        if (document.visibilityState === "hidden") {
+          clearInterval(amrap);
+        }
+    }
+}
+
+startAmrap();
 emomButton.addEventListener('click', startEmom);
 
