@@ -6,34 +6,29 @@ const lightbox = document.createElement('div');
 lightbox.id = 'lightbox';
 document.body.appendChild(lightbox);
 
-// display lightbox/video/"follow along" text when buttons are clicked
-button1.addEventListener('click', () => {
-    lightbox.classList.add("active");
-    let video = document.createElement('div');
-    let text = document.createElement('p');
-    video.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/wvbJb8Oi_ig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>';
-    text.textContent = 'follow along!';
-    while (lightbox.firstChild) {
-        lightbox.removeChild(lightbox.firstChild);
-    }
-    lightbox.append(video, text);
-});
+// save YouTube URLs in an array
+const urls = ["https://www.youtube.com/embed/wvbJb8Oi_ig", "https://www.youtube.com/embed/EamArBZOUhw"];
 
-button2.addEventListener('click', () => {
-    lightbox.classList.add("active");
+// display lightbox/video/"follow along" text when buttons are clicked
+function displayVideo(src){
+    lightbox.classList.add('active');
     let video = document.createElement('div');
     let text = document.createElement('p');
-    video.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/EamArBZOUhw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>';
+    video.innerHTML = `<iframe width="560" height="315" src=${src} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`;
     text.textContent = 'follow along!';
     while (lightbox.firstChild) {
         lightbox.removeChild(lightbox.firstChild);
     }
     lightbox.append(video, text);
-});
+}
 
 // exit lightbox
 lightbox.addEventListener('click', e => {
     if (e.target !== e.currentTarget) return;
     lightbox.classList.remove('active');
 });
+
+// listen for clicks on "watch live demo" button
+button1.addEventListener('click', () => displayVideo(urls[0]));
+button2.addEventListener('click', () => displayVideo(urls[1]));
 

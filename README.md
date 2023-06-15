@@ -130,7 +130,11 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
             + When a change in the page's `visibilityState` is detected, a page reload will be required to reset the interval if it was cleared by either minimizing the window or by switching browser tabs.
    + `swirl.js` - used by `index.html`
       + Controls the swirl animation when homepage loads.   
-   + `video.js` - used by `level3.html`  
+   + `video.js` - used by `level3.html`
+      + This is the `click` event handler for the two *watch live demo* buttons. 
+      + The lightbox overlay containing the YouTube `<iframe>` and "follow along" text is displayed on button click.
+      + An `eventListener` has also been added to the lightbox `<div>` element to distinguish between clicks on itself and those on its children. Clicking anywhere on the lightbox--except on the video or "follow along" text--triggers it to close and returns the user to the main *level3.html* page.
+      + A grayscale filter has been applied over the lighbox content to match the app's black-and-white color scheme.
    + `yellow.js` - used by all 4 *.html* files
       + Controls the yellow hover effect that appears over the page, on hover over any of the three links (*level 1*, *level 2*, *level 3*) inside the triangle-shaped navigation.
 
