@@ -114,7 +114,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
               fourth child if the EMOM `<div>`.
          5. `updateContent` 
             + Accepts three arguments:  
-              1. `containerEl` (HTML element) - This is the parent element of both the ASL images and caption text. Since we have two different `<div>`'s that need to be updated, we need a way to reference the AMRAP and EMOM `<div>`s to know which to update.
+              1. `containerEl` (HTML element) - This is the parent element of both the ASL images and caption text. Since we have two different `<div>`s that need to be updated, we need a way to reference the AMRAP and EMOM `<div>`s to know which to update.
               2. `childElNum1` (integer) - This is the image container `<div>`'s index number in the `containerEl`'s `children` property, used by `getASLImages` to identify which child element needs to be removed from the DOM when a new set of images has been created to replace it.
               3. `childElNum2` (integer) - This is the `<p>` element's index number in the `containerEl` 's `children` property, used by `getImgCaption` to identify which child element needs to be removed from the DOM when a new caption has been created to replace it.
             + Calls the `pickWord`, `getASLImages`, and `getImgCaption` functions.
@@ -132,8 +132,9 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
       + Controls the swirl animation when homepage loads.   
    + `video.js` - used by `level3.html`
       + This is the `click` event handler for the two *watch live demo* buttons. 
-      + The lightbox overlay containing the YouTube `<iframe>` and "follow along" text is displayed on button click.
-      + An `eventListener` has also been added to the lightbox `<div>` element to distinguish between clicks on itself and those on its children. Clicking anywhere on the lightbox--except on the video or "follow along" text--triggers it to close and returns the user to the main *level3.html* page.
+      + The lightbox overlay containing the YouTube `<iframe>` and "follow along" text are displayed on button click.
+      + The YouTube embed has been configured to autoplay on load and loop continuously--until the user pauses the video or exits lightbox.
+      + An `eventListener` has also been added to the lightbox `<div>` element to distinguish between clicks on itself and those on its children. Clicking anywhere on the lightbox--except on the video or "follow along" text--triggers it to close and returns the user to the main *level3.html* page. Video will also stop if it was playing when user exits lightbox.
       + A grayscale filter has been applied over the lighbox content to match the app's black-and-white color scheme.
    + `yellow.js` - used by all 4 *.html* files
       + Controls the yellow hover effect that appears over the page, on hover over any of the three links (*level 1*, *level 2*, *level 3*) inside the triangle-shaped navigation.

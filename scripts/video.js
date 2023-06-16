@@ -7,14 +7,40 @@ lightbox.id = 'lightbox';
 document.body.appendChild(lightbox);
 
 // save YouTube URLs in an array
-const urls = ["https://www.youtube.com/embed/wvbJb8Oi_ig", "https://www.youtube.com/embed/EamArBZOUhw"];
+const videoIDs = ["wvbJb8Oi_ig", "EamArBZOUhw"];
+
+// remember which player is playing
+let videoPlayerID;
 
 // display lightbox/video/"follow along" text when buttons are clicked
-function displayVideo(src){
+function displayVideo(videoID, playerID) {
     lightbox.classList.add('active');
     let video = document.createElement('div');
+    video.id = playerID;
+    videoPlayerID = playerID;
+
     let text = document.createElement('p');
-    video.innerHTML = `<iframe width="560" height="315" src=${src} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowfullscreen></iframe>`;
+    /*
+        customized YouTube URL params
+        https://developers.google.com/youtube/player_parameters
+
+        --> autoplay=1 (0 by default) >> automatically plays video on load
+        --> modestbranding=1 >> prevents YouTube logo from displaying on control bar
+        --> playlist=${videoID}&loop=1 >> play same video repeatedly
+            >>>> controls param is set to 1 by default, keeping as is, so users can stop/play as they wish
+    */
+    video.innerHTML = `
+        <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/${videoID}?autoplay=1&modestbranding=1&playlist=${videoID}&loop=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;"
+            allowfullscreen
+        >
+        </iframe>
+    `;
     text.textContent = 'follow along!';
     while (lightbox.firstChild) {
         lightbox.removeChild(lightbox.firstChild);
@@ -22,13 +48,18 @@ function displayVideo(src){
     lightbox.append(video, text);
 }
 
-// exit lightbox
-lightbox.addEventListener('click', e => {
+function exitLightbox(e) {
     if (e.target !== e.currentTarget) return;
     lightbox.classList.remove('active');
-});
+
+    // stops player (if playing) when lightbox closes
+    const iframe = document.querySelector(`#${videoPlayerID}>iframe`);
+    iframe.setAttribute('src', '');
+}
+
+// exit lightbox
+lightbox.addEventListener('click', exitLightbox);
 
 // listen for clicks on "watch live demo" button
-button1.addEventListener('click', () => displayVideo(urls[0]));
-button2.addEventListener('click', () => displayVideo(urls[1]));
-
+button1.addEventListener('click', () => displayVideo(videoIDs[0], "player1"));
+button2.addEventListener('click', () => displayVideo(videoIDs[1], "player2"));
