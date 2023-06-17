@@ -71,20 +71,25 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 <br>
 
 📁 Subdirectories (3 subfolders):
-1. 📂 *assets* (one subfolder + 4 image files):  
+1. 📂 *assets* (one subfolder + 5 image files):  
    + 📂 *alphabet* folder (26 *svg* files, one for each ASL alphabet) - All are from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Fingerspelling) by [WPClipart](https://www.wpclipart.com/sign_language/American_ABCs/index.html).  
    + *binary_swirl.png* - from [Pixabay](https://pixabay.com/vectors/binary-random-numbers-digital-ones-1254482/) by [GDJ](https://pixabay.com/users/gdj-1086657/)  
+   + *hand.png* - from [Flaticon](https://www.flaticon.com/free-icon/hand_827968?term=high+five&page=1&position=41&origin=search&related_id=827968) by [Berkahicon](https://www.flaticon.com/authors/berkahicon)
    + logos (*logo32.png* & *logo256.png*) - both from [Flaticon](https://www.flaticon.com/free-icon/easy-to-use_4456893) by [Freepik](https://www.flaticon.com/authors/freepik)  
    + *power-finger.gif* - from [GIPHY](https://giphy.com/gifs/money-twitter-tweet-3IUZ9PpKfTEUQNb4od) by [Antony Hare](https://giphy.com/antonyhare/)
 
 <br>
 
-2. 📂 *scripts* (6 *.js* files): 
+2. 📂 *scripts* (7 *.js* files): 
    + `alphabet.js` - used by `level1.html` 
       + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
       + The `Popover.js` & `bootstrap.min.js` scripts are also included in `level1.html` to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
    + `copyright.js` - used by all 4 *.html* files
       + Programmatically generates the copyright year and footer text.   
+   + `highFive.js` - used by all pages except the homepage
+      + This script is responsible for the high-five hover effect on the logo.
+      + The `Popover.js` & `bootstrap.min.js` scripts are included in `level1.html`, `level2.html`, and `level3.html` to create the Bootstrap "HIGH FIVE!" tooltip that displays on hover over the logo, when it turns into an open palm ✋. 
+      + When the user moves the pointer (hand) cursor into the logo, and then clicks on it, it should resemble a--clap your hands, say yeah!--high five 👏 when the hands meet.
    + `speller.js` - used by `level2.html`
       + This script contains 7 functions:  
          1. `getRandomInteger`
