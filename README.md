@@ -19,7 +19,7 @@ This is the at-home physical therapy and meditation retreat (all rolled into one
 _Disclaimer: The information provided herein should not be used for diagnosing or treating a health problem or disease. Always seek the advice of a qualified IT professional or a more experienced software engineer regarding bug-infested code--not to be confused with the creepy-crawly variety. Otherwise, consult Pest Control._
 
 ### 💻 **TECH STACK**
-HTML, CSS, Javascript
+HTML, CSS, Javascript, Bootstrap
 
 Key JS Topics:  
 ✅ `keydown` events  
@@ -148,9 +148,10 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 
 3. 📂 *stylesheets* (5 *.css* files):  
     + *styles.css* - general stylesheet used by all 4 *.html* files
-    + *index.css* - used by *index.html*
-    + *level1.css* - used by *level1.html*
-    + *level2.css* - used by *level2.html*
+      + `high-five-tooltip` is a custom class used to style the logo's Bootstrap "HIGH FIVE!" tooltip.
+    + *index.css* - styling exclusive to *index.html*
+    + *level1.css* - styling exclusive to *level1.html*
+    + *level2.css* - styling exclusive to *level2.html*
       + *start* button is styled with Bootstrap.
-    + *level3.css* - used by *level3.html*
+    + *level3.css* - styling exclusive to *level3.html*
       + *watch live demo* buttons are styled with Bootstrap.
