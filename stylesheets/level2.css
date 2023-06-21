@@ -17,6 +17,11 @@
     background-color: yellow;
 }
 
+.content-div>p>.timer {
+    background-color: yellow;
+    font-family: 'Press Start 2P', monospace;
+}
+
 .content-div button {
     margin-top: 2rem;
     padding: 1rem 2rem;

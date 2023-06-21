@@ -91,17 +91,25 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
       + The `Popover.js` & `bootstrap.min.js` scripts are included in `level1.html`, `level2.html`, and `level3.html` to create the Bootstrap "HIGH FIVE!" tooltip that displays on hover over the logo, when it turns into an open palm ✋. 
       + When the user moves the pointer (hand) cursor into the logo, and then clicks on it, it should resemble a--clap your hands, say yeah!--high five 👏 when the hands meet.
    + `speller.js` - used by `level2.html`
-      + This script contains 7 functions:  
+      + This script contains 10 functions:  
          1. `getRandomInteger`
-            + This is a helper function for `pickWord`.
+            + This is a helper function for `checkWord`.
             + Returns a random integer based on a specified range. Accepts two arguments: 
                + the min value within the range
                + the max value within the range
-         2. `pickWord`
+         2. `checkWord`
+            + This is a helper function for `pickWord`.
+            + `currentWord` parameter - accepts either `currentAmrapWord` or `currentEmomWord` as an argument to determine the first or next word for the corresponding workout.
+            + Calls `getRandomInteger` to get a random number used to index into the `words` array, to select a new word to display.
+            + Returns a random word--that is different from `currentWord` (if already defined). This is achieved by filtering out `currentWord` from the `words` array, from which the next word is randomly selected, ensuring `currentWord` has no chance of being selected as the next word.
+            + If `currentWord` is `undefined`, then this function returns the initial word to display.
+         3. `pickWord`
             + This is a helper function for `updateContent`.
-            + Calls `getRandomInteger` to get a random index number.
-            + Returns an array of characters (single-letter strings) that make up a randomly chosen word from the `words` array--using a random number from `getRandomInteger` to index into it.
-         3. `getASLImages`
+            + `workout` parameter - function accepts either "emom" or "amrap" as an argument to determine the word to display for the corresponding workout.
+            + Calls `checkWord` to get a random word, by passing in the current word as an argument.
+            + Replaces current value of `currentWord` (i.e., either the `currentAmrapWord` or `currentEmomWord` global variable) with the new random word (`string`) returned from `checkWord`, so it can be referenced as the latest `currentWord` in the next `pickWord` interval.
+            + Returns an array of characters (single-letter strings) that make up the new random word.
+         4. `getASLImages`
             + This is another helper function for `updateContent`.
             + Returns a container `<div>` that holds the ASL *svg* equivalent of each character in the `wordArr` argument. 
             + An `<img>` element is created for each character in the word array, then appended to the container `<div>`. 
@@ -111,28 +119,41 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
             + Once the text is translated to image, this function removes all previous images from the DOM--based on its `containerEL` and `num` arguments.
                + The `num` argument tells the function to remove `containerEL`'s second child if `containerEL` is the AMRAP `<div>`, but its
               third child if the EMOM `<div>`.
-         4. `getImgCaption`
+         5. `getImgCaption`
             + This is yet another helper function for `updateContent`.
             + Returns a `<p>` element containing the "fingerspell [joined characters from word array]" caption under the ASL images.
             + Once the new caption text has been created, this function removes the previous caption from the DOM--based on its `containerEL` and `num` arguments.
                + The `num` argument tells the function to remove `containerEL`'s third child if `containerEL` is the AMRAP `<div>`, but its 
               fourth child if the EMOM `<div>`.
-         5. `updateContent` 
-            + Accepts three arguments:  
+         6. `updateContent` 
+            + This is a helper function for both `startEmom` and `startAmrap`.
+            + Accepts four arguments:  
               1. `containerEl` (HTML element) - This is the parent element of both the ASL images and caption text. Since we have two different `<div>`s that need to be updated, we need a way to reference the AMRAP and EMOM `<div>`s to know which to update.
               2. `childElNum1` (integer) - This is the image container `<div>`'s index number in the `containerEl`'s `children` property, used by `getASLImages` to identify which child element needs to be removed from the DOM when a new set of images has been created to replace it.
               3. `childElNum2` (integer) - This is the `<p>` element's index number in the `containerEl` 's `children` property, used by `getImgCaption` to identify which child element needs to be removed from the DOM when a new caption has been created to replace it.
+              4. `workout` (string) - Either "emom" or "amrap" to identify which of the two workouts needs the content update. This string is passed in as an argument to `pickWord` for word selection.
             + Calls the `pickWord`, `getASLImages`, and `getImgCaption` functions.
               + `pickWord` - its return value (an array of characters) is passed in to both `getASLImages` and `getImgCaption` for processing.
               + `getASLImages` - `childElNum1` and `containerEl` are also passed in as arguments.
               + `getImgCaption` - `childElNum2` and `containerEl` are also passed in as arguments.
             + Lastly, this function appends the new content (namely, the return values of `getASLImages` and `getImgCaption`) to the DOM.
-         6. `startEmom`
+         7. `updateTimer`
+            + This is a helper function for `startAmrap`.
+            + `timeLeft` parameter (integer) - the number of seconds left in the interval.
+            + This function provides the `textContent` output for the AMRAP's countdown timer based on `timeLeft`.
+         8. `startEmom`
             + This is the `click` event handler for the EMOM *start* button. 
             + Sets up a timer using `setTimeout` to display a new ASL word and caption every five seconds--using `setInterval` to call `updateContent`--for one minute.
-         7. `startAmrap`
-            + This function calls `updateContent` to generate a new ASL word and caption every 20,000ms using `setInterval`--only for as long as the page remains open and visible in both the current browser tab and browser window.
-            + When a change in the page's `visibilityState` is detected, a page reload will be required to reset the interval if it was cleared by either minimizing the window or by switching browser tabs.
+         9. `startAmrap`
+            + This function calls: 
+               1. `updateContent` - to generate a new ASL word and caption every 20 seconds (20,000ms) using an outer recursive `setInterval`--which is given an ID of `startAmrapID`.
+               2. `updateTimer` **-----TODO: FIX BUG ON VISIBILITYCHANGE-----** - to initiate the countdown from 20 (based on `startTime`) to zero, using an inner recursive `setInterval`--which is given an ID of `setTimerID`. The countdown restarts when a new word displays for the next 20-second interval.
+            + `startTime` parameter - This is the time in milliseconds from which the countdown begins. It is converted to seconds and decremented by 1 at every one-second interval of the countdown.
+         10. `handleVisibilityChange`
+               + This is the event handler for `visibilitychange` events detected on the page.
+               + **-----TODO: FIX BUG-----** When the page's `visibilityState` is `hidden`, it clears the timers for the AMRAP by passing in `setTimerID` and `startAmrapID` (global references to `startAmrap`'s two `setInterval` functions) to `clearInterval`. This stops the timers from running when the page is idle--in "sleep mode".
+               + **-----TODO: FIX BUG-----** When the page's `visibilityState` is back to `visible`--e.g., user returns to the page after minimizing the browser window or to the tab containing the page after switching tabs--`startAmrap` is explicitly called to restart the timers--to "wake up" the page. 
+                  + Note, this is different from a page reload, in which case the page's state is completely "destroyed". Hitting the browser's refresh button or returning to the page after navigating away from it via the back button or an internal page link automatically triggers a call to `startAmrap` to restore the page.
    + `swirl.js` - used by `index.html`
       + Controls the swirl animation when homepage loads.   
    + `video.js` - used by `level3.html`
