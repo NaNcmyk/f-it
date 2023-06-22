@@ -23,7 +23,7 @@ HTML, CSS, Javascript, Bootstrap
 
 Key JS Topics:  
 ✅ `DOM `events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`  
-✅ `setTimeOut` / `clearTimeout`  
+✅ `setTimeout` / `clearTimeout`  
 ✅ `setInterval` / `clearInterval`  
 
 ---
@@ -42,7 +42,7 @@ If you do not know the ABC's of ASL, this foundation class is designed for you. 
 #### 💪 **LEVEL 2**
 Once you have mastered the fundamentals, you can move on to SPELLING in ASL. You'll be completing your sets ([time under tension](https://www.healthline.com/health/exercise-fitness/time-under-tension)) while...*timed under tension*. Don't uhhh...F-it up.  
 
-+ **AMRAP** (as many reps as possible) - Test how many times you can fingerspell a single word within the alloted 20,000-millisecond (20-second) timeframe. Timer starts as soon as the page loads--no time to lose! (If you get caught off guard--no worries. Wait for the next word to pop up on screen. The exercise changes every 20 seconds.)
++ **AMRAP** (as many reps as possible) - Test how many times you can fingerspell a single word within the alloted 20-second timeframe. Timer starts as soon as the page loads--no time to lose! (If you get caught off guard--no worries. Wait for the next word to pop up on screen. The exercise changes every 20 seconds.)
 + **EMOM** (every minute on the minute) - You'll be presented with a set of 12 fingerspelling exercises to complete for one minute, at intervals of five seconds per word. Words are selected at random. The one-minute timer starts as soon as you hit the *start* button. The EMOM has no set duration. We recommend repeating each one-minute block [3-5 times](https://twitter.com/hubermanlab/status/1553501345084166144?lang=en) to really build up that muscle memory.
 
 #### 💪 **LEVEL 3**
@@ -79,7 +79,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 
 <br>
 
-2. 📂 *scripts* (7 *.js* files): 
+2. 📂 *scripts* (8 *.js* files): 
    + `alphabet.js` - used by `level1.html` 
       + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
       + The `Popover.js` & `bootstrap.min.js` scripts are also included in `level1.html` to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
@@ -90,6 +90,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
       + The `Popover.js` & `bootstrap.min.js` scripts are included in `level1.html`, `level2.html`, and `level3.html` to create the Bootstrap "HIGH FIVE!" tooltip that displays on hover over the logo, when it turns into an open palm ✋. 
       + When the user moves the pointer (hand) cursor into the logo, and then clicks on it, it should resemble a--clap your hands, say yeah!--high five 👏 when the hands meet.
    + `speller.js` - used by `level2.html`
+      + Note the `type="module"` in the `<script>` tag to import the `words` array.
       + This script contains 11 functions:  
          1. `getRandomInteger`
             + This is a helper function for `checkWord`.
@@ -158,7 +159,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
                + This is the event handler for `visibilitychange` events detected on the page.
                + When the page's `visibilityState` is `hidden`, it clears `startAmrap`'s two `setInterval` functions by calling an immediate `setTimeout` on them. Inside `setTimeout`, `setTimerID` and `startAmrapID` (global references to the `setInterval` functions) are passed in to `clearInterval`, which stops the timers from running when the page is idle (in "sleep mode").
                + This `setTimeout` is given an ID of `timeoutID`, which `restartAmrap` references for its `clearTimeout` to reset `startAmrap`'s paused timers.
-               + When the page's `visibilityState` is back to `visible`--e.g., user returns to the page after minimizing the browser window or to the tab containing the page after switching tabs--`restartAmrap` is called to restart `startAmrap`'s `setInterval` functions--to "wake up" the page.
+               + When the page's `visibilityState` is back to `visible`--e.g., user returns to the page after minimizing the browser window or to the tab containing the page after switching tabs--`restartAmrap` is called to restart `startAmrap`'s `setInterval` functions--to "reawaken" the page.
                   + Note, this is different from a page reload, in which case the page's entire state--including memory of all its `visibilitychange` events--is completely "destroyed". Hitting the browser's refresh button or returning to the page after navigating away from it via the back button or an internal page link automatically triggers a call to `startAmrap` (based on a `load` event)--not `restartAmrap` (based on a `visibilitychange` event)--to restore the page anew, back to its initial state, pre-`visibilitychange`.
    + `swirl.js` - used by `index.html`
       + Controls the swirl animation when homepage loads.   
@@ -168,6 +169,11 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
       + The YouTube embed has been configured to autoplay on load and loop continuously--until the user pauses the video or exits lightbox.
       + An `eventListener` has also been added to the lightbox `<div>` element to distinguish between clicks on itself and those on its children. Clicking anywhere on the lightbox--except on the video or "follow along" text--triggers it to close and returns the user to the main *level3.html* page. Video will also stop if it was playing when user exits lightbox.
       + A grayscale filter has been applied over the lighbox content to match the app's black-and-white color scheme.
+   + `words.js` - used by `level1.html`, `level2.html`, and `speller.js`
+      + Note the `type="module"` in the `<script>` tag to export the `words` array.
+      + This script dynamically generates the text content for each `<b>` tag in `level1.html` based on the `words` array--which, as a result, overrides the hardcoded words in the markup.
+      + `speller.js` imports the `words` array as its spelling word list.
+      + The words in `words` array can be easily modified as needed. Changes will automatically be reflected in `level1.html` and `level2.html`.
    + `yellow.js` - used by all 4 *.html* files
       + Controls the yellow hover effect that appears over the page, on hover over any of the three links (*level 1*, *level 2*, *level 3*) inside the triangle-shaped navigation.
 

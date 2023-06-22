@@ -36,7 +36,3 @@ function updateContent(e) {
 
 // listen for keydown events
 window.addEventListener('keydown', updateContent);
-
-
-
-

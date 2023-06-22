@@ -1,31 +1,4 @@
-const words = [
-    'annihilate',
-    'banish',
-    'crush',
-    'demolish',
-    'eradicate',
-    'fizzle',
-    'geld',
-    'hinder',
-    'invalidate',
-    'jettison',
-    'kill',
-    'liquidate',
-    'mar',
-    'nullify',
-    'obliterate',
-    'pulverize',
-    'quash',
-    'ravage',
-    'smash',
-    'terminate',
-    'uproot',
-    'vendetta',
-    'wreck',
-    'x-out',
-    'yerk',
-    'zap'
-];
+import words from './words.js';
 
 const amrapDiv = document.querySelector('.stripes .content-div');
 const emomDiv = document.querySelector('.polka-dots .content-div');
