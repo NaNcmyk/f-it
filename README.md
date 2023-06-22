@@ -150,7 +150,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
             + `startTime` parameter - This is the time in milliseconds from which the countdown begins. It is converted to seconds and decremented by 1 at every one-second interval of the countdown. 
             + `timeLeft` - This is the variable that stores the countdown's current count value. ⚠️ *It must be initialized OUTSIDE OF the two `setInterval` functions--so that its value can be properly reset to 20 (seconds)--and dissociated with any interrupted countdowns--every time there is a new call to* `startAmrap`.
          10. `restartAmrap`  
-             + This function is responsible for restarting  the AMRAP--by calling `startAmrap` again--after a pause triggered by an on change to the page's `visibiltyState`.
+             + This function is responsible for restarting  the AMRAP--by calling `startAmrap` again--after a pause triggered by a change to the page's `visibilityState`.
              + parameters:
                1. `startTime` - the argument to pass in to `startAmrap` to restart a new 20-second interval AMRAP
                2. `timeoutID` - the ID to pass in to `clearTimeout` to unclear the two `setInterval` functions that were placed in a `setTimeout` when the page's `visibilityState` was `hidden`
