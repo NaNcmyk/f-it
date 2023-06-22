@@ -1,10 +1,25 @@
 function updateContent(e) {
-    const blob = document.querySelector(`.content-blob[data-key="${e.key}"]`)
-    const key = document.querySelector(`.content-div[data-key="${e.key}"]`);
-    const src = `/assets/alphabet/${e.key}.svg`;
+    // use regex to check if user pressed a valid key (an alphabet, case insensitive)
+    // event codes for alphabetic keys are the same regardless of case
+    // if invalid key, exit
+    if (!e.code.match(/Key[A-Z]/)) {
+        console.log(`invalid key: ${e.code}`);
+        return;
+    }
+
+    // // uncomment to see which key triggered the keydown event in console
+    // console.log(`valid key:\nevent code: ${e.code}\nevent key: ${e.key}`);
+
+    // force event key to lowercase, to match case insensitively (in case caps lock is on)
+    const lowerCaseEventKey = e.key.toLowerCase();
+    // console.log(`event key (lowercase): ${lowerCaseEventKey}`);
+
+    const blob = document.querySelector(`.content-blob[data-key="${lowerCaseEventKey}"]`);
+    const initialContentDiv = document.querySelector(`.content-div[data-key="${lowerCaseEventKey}"]`);
+    const src = `/assets/alphabet/${lowerCaseEventKey}.svg`;
 
     // remove current content
-    key.style.display = 'none';
+    initialContentDiv.style.display = 'none';
 
     // generate new content
     // content div
@@ -17,7 +32,7 @@ function updateContent(e) {
     img.style.width = '15rem';
     img.style.height = '15rem';
     img.dataset['toggle'] = 'tooltip';
-    img.title = `${e.key}`;
+    img.title = `${lowerCaseEventKey}`;
     new bootstrap.Tooltip(img);
 
     // text div

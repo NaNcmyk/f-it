@@ -23,6 +23,7 @@ HTML, CSS, Javascript, Bootstrap
 
 Key JS Topics:  
 ✅ `DOM `events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`  
+✅ `KeyboardEvent` properties: `key` & `code`  
 ✅ `setTimeout` / `clearTimeout`  
 ✅ `setInterval` / `clearInterval`  
 
@@ -82,6 +83,9 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 2. 📂 *scripts* (8 *.js* files): 
    + `alphabet.js` - used by `level1.html` 
       + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
+      + `updateContent` is the `keydown` event handler. 
+      + A non-alphabetic (invalid) event key will immediately terminate execution of `updateContent`. ⚠️ *Check console for log of invalid key.*
+      + Once non-alphabetic keys have been ruled out as event triggers, in order to match the `key` case insensitively--in case user's caps lock is on--the `toLowerCase()` method is used on the event `key` string to force it to be lowercase--to match the file name--a lowercase alphabet--of the corresponding ASL `.svg` (i.e., the new content). 💡*Uncomment the two `console.log`s for more details.*
       + The `Popover.js` & `bootstrap.min.js` scripts are also included in `level1.html` to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
    + `copyright.js` - used by all 4 *.html* files
       + Programmatically generates the copyright year and footer text.   
