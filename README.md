@@ -22,10 +22,9 @@ _Disclaimer: The information provided herein should not be used for diagnosing o
 HTML, CSS, Javascript, Bootstrap
 
 Key JS Topics:  
-✅ `keydown` events  
-✅ `setTimeOut`  
-✅ `setInterval`  
-✅ the `DOM`
+✅ `DOM `events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`  
+✅ `setTimeOut` / `clearTimeout`  
+✅ `setInterval` / `clearInterval`  
 
 ---
 
@@ -47,7 +46,7 @@ Once you have mastered the fundamentals, you can move on to SPELLING in ASL. You
 + **EMOM** (every minute on the minute) - You'll be presented with a set of 12 fingerspelling exercises to complete for one minute, at intervals of five seconds per word. Words are selected at random. The one-minute timer starts as soon as you hit the *start* button. The EMOM has no set duration. We recommend repeating each one-minute block [3-5 times](https://twitter.com/hubermanlab/status/1553501345084166144?lang=en) to really build up that muscle memory.
 
 #### 💪 **LEVEL 3**
-For fluent ASL signers only. Think: karaoke, but...for your fingers. Can you keep up?! No singing 🚫🎤 required unless...you really want to.
+For fluent ASL signers only. Think: karaoke, but...for your fingers. Can you keep up?! No singing 🚫🎤 required (unless you really want to).
 
 <br>
 
@@ -91,7 +90,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
       + The `Popover.js` & `bootstrap.min.js` scripts are included in `level1.html`, `level2.html`, and `level3.html` to create the Bootstrap "HIGH FIVE!" tooltip that displays on hover over the logo, when it turns into an open palm ✋. 
       + When the user moves the pointer (hand) cursor into the logo, and then clicks on it, it should resemble a--clap your hands, say yeah!--high five 👏 when the hands meet.
    + `speller.js` - used by `level2.html`
-      + This script contains 10 functions:  
+      + This script contains 11 functions:  
          1. `getRandomInteger`
             + This is a helper function for `checkWord`.
             + Returns a random integer based on a specified range. Accepts two arguments: 
@@ -147,13 +146,20 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
          9. `startAmrap`
             + This function calls: 
                1. `updateContent` - to generate a new ASL word and caption every 20 seconds (20,000ms) using an outer recursive `setInterval`--which is given an ID of `startAmrapID`.
-               2. `updateTimer` **-----TODO: FIX BUG ON VISIBILITYCHANGE-----** - to initiate the countdown from 20 (based on `startTime`) to zero, using an inner recursive `setInterval`--which is given an ID of `setTimerID`. The countdown restarts when a new word displays for the next 20-second interval.
-            + `startTime` parameter - This is the time in milliseconds from which the countdown begins. It is converted to seconds and decremented by 1 at every one-second interval of the countdown.
-         10. `handleVisibilityChange`
+               2. `updateTimer` - to initiate the countdown from 20 (based on `startTime`) to zero, using an inner recursive `setInterval`--which is given an ID of `setTimerID`. The countdown restarts when a new word displays for the next 20-second interval.
+            + `startTime` parameter - This is the time in milliseconds from which the countdown begins. It is converted to seconds and decremented by 1 at every one-second interval of the countdown. 
+            + `timeLeft` - This is the variable that stores the countdown's current count value. ⚠️ *It must be initialized OUTSIDE OF the two `setInterval` functions--so that its value can be properly reset to 20 (seconds)--and dissociated with any interrupted countdowns--every time there is a new call to* `startAmrap`.
+         10. `restartAmrap`  
+             + This function is responsible for restarting  the AMRAP--by calling `startAmrap` again--after a pause triggered by an on change to the page's `visibiltyState`.
+             + parameters:
+               1. `startTime` - the argument to pass in to `startAmrap` to restart a new 20-second interval AMRAP
+               2. `timeoutID` - the ID to pass in to `clearTimeout` to unclear the two `setInterval` functions that were placed in a `setTimeout` when the page's `visibilityState` was `hidden`
+         11. `handleVisibilityChange`
                + This is the event handler for `visibilitychange` events detected on the page.
-               + **-----TODO: FIX BUG-----** When the page's `visibilityState` is `hidden`, it clears the timers for the AMRAP by passing in `setTimerID` and `startAmrapID` (global references to `startAmrap`'s two `setInterval` functions) to `clearInterval`. This stops the timers from running when the page is idle--in "sleep mode".
-               + **-----TODO: FIX BUG-----** When the page's `visibilityState` is back to `visible`--e.g., user returns to the page after minimizing the browser window or to the tab containing the page after switching tabs--`startAmrap` is explicitly called to restart the timers--to "wake up" the page. 
-                  + Note, this is different from a page reload, in which case the page's state is completely "destroyed". Hitting the browser's refresh button or returning to the page after navigating away from it via the back button or an internal page link automatically triggers a call to `startAmrap` to restore the page.
+               + When the page's `visibilityState` is `hidden`, it clears `startAmrap`'s two `setInterval` functions by calling an immediate `setTimeout` on them. Inside `setTimeout`, `setTimerID` and `startAmrapID` (global references to the `setInterval` functions) are passed in to `clearInterval`, which stops the timers from running when the page is idle (in "sleep mode").
+               + This `setTimeout` is given an ID of `timeoutID`, which `restartAmrap` references for its `clearTimeout` to reset `startAmrap`'s paused timers.
+               + When the page's `visibilityState` is back to `visible`--e.g., user returns to the page after minimizing the browser window or to the tab containing the page after switching tabs--`restartAmrap` is called to restart `startAmrap`'s `setInterval` functions--to "wake up" the page.
+                  + Note, this is different from a page reload, in which case the page's entire state--including memory of all its `visibilitychange` events--is completely "destroyed". Hitting the browser's refresh button or returning to the page after navigating away from it via the back button or an internal page link automatically triggers a call to `startAmrap` (based on a `load` event)--not `restartAmrap` (based on a `visibilitychange` event)--to restore the page anew, back to its initial state, pre-`visibilitychange`.
    + `swirl.js` - used by `index.html`
       + Controls the swirl animation when homepage loads.   
    + `video.js` - used by `level3.html`

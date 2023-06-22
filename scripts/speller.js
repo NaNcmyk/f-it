@@ -25,7 +25,7 @@ const words = [
     'x-out',
     'yerk',
     'zap'
-]
+];
 
 const amrapDiv = document.querySelector('.stripes .content-div');
 const emomDiv = document.querySelector('.polka-dots .content-div');
@@ -87,7 +87,7 @@ function pickWord(workout) {
     return arr;
 }
 
-// translate letters of randomly chosen word into their ASL equivalent
+// translate letters of randomly chosen word to their ASL equivalent
 function getASLImages(containerEl, wordArr, num) {
     // create container to store ASL images
     const wordContainer = document.createElement('div');
@@ -163,13 +163,13 @@ function startEmom() {
 }
 
 function startAmrap(startTime) {
+    // convert ms arg to seconds
+    let timeLeft = startTime / 1000;
+
     // OUTER INTERVAL - run every 20 seconds //////////////////
     // immediately call outer interval
     // pass in named function--selfExecuteAmrap--so that it can be self-referenced in return
     startAmrapID = setInterval(function selfExecuteAmrap() {
-        // convert ms arg to seconds
-        let timeLeft = startTime / 1000;
-
         // save interval IDs
         // change content for children 2 & 3 of container element
         updateContent(amrapDiv, 2, 3, 'amrap');
@@ -197,16 +197,24 @@ function startAmrap(startTime) {
     }(), 20000);
 }
 
+// calls startAmrap & removes timeout on intervals
+function restartAmrap(startTime, timeoutID) {
+    clearTimeout(timeoutID);
+    startAmrap(startTime);
+}
+
 // clear interval if page is no longer visible (e.g., user navigates away from page, minimizes window, or switches to new tab in same browser)
 // otherwise intervals will run in an infinite loop
 function handleVisibilityChange() {
+    let timeoutID;
     if (document.visibilityState === 'hidden') {
-        clearInterval(setTimerID);
-        clearInterval(startAmrapID);
-
+        timeoutID = setTimeout(() => {
+            clearInterval(startAmrapID);
+            clearInterval(setTimerID);
+        });
     } else if (document.visibilityState === 'visible') {
         // restart interval when document is visible again
-        startAmrap(20000);
+        restartAmrap(20000, timeoutID);
     }
 }
 
