@@ -31,9 +31,12 @@ function updateContent(e) {
     img.src = src;
     img.style.width = '15rem';
     img.style.height = '15rem';
+    img.style.animation = `bounce 1s cubic-bezier(0.3, 0.9, 0.4, 1)`;
     img.dataset['toggle'] = 'tooltip';
     img.title = `${lowerCaseEventKey}`;
-    new bootstrap.Tooltip(img);
+    const tooltip = new bootstrap.Tooltip(img, {
+        customClass: 'ASL-letter-tooltip'
+    });
 
     // text div
     const textDiv = document.createElement('div');
