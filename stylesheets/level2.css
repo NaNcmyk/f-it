@@ -52,6 +52,23 @@
     width: 80px;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes highlighter {
+    0% {
+        background-color: #fff;
+    }
+    100% {
+        background-color: yellow;
+    }
+}
 
 /* -----------------media queries----------------- */
 @media (max-width: 1060px) {

@@ -97,6 +97,22 @@ function getImgCaption(containerEl, wordArr, num) {
     return text;
 }
 
+function animateContent(wordContainer, text, delta) {
+    let time = 0;
+    const totalDuration = (wordContainer.children.length - 1) * delta;
+
+    for (let imgEl of wordContainer.childNodes) {
+        imgEl.style.animation = `fadeIn ${time}s ease-in`;
+        time += delta;
+    }
+
+    // to keep highlighter animation in sync with fadeIn animation
+    // highlighter duration value = total time to complete fadeIn animation
+    //  text.children[0] = the <i> tag containing the English equivalent (in Roman alphabets) of the ASL word displayed
+    text.children[0].style.animation = `highlighter ${totalDuration}s ease-in`;
+    return [wordContainer, text];
+}
+
 function updateContent(containerEl, childElNum1, childElNum2, workout) {
     let wordArr = pickWord(workout);
 
@@ -104,8 +120,11 @@ function updateContent(containerEl, childElNum1, childElNum2, workout) {
     const wordContainer = getASLImages(containerEl, wordArr, childElNum1);
     const text = getImgCaption(containerEl, wordArr, childElNum2);
 
-    // add word container and caption to DOM
-    containerEl.append(wordContainer, text);
+    // animate content
+    const [animatedWordContainer, animatedText] = animateContent(wordContainer, text,  0.15);
+
+    // add animated word container and caption to DOM
+    containerEl.append(animatedWordContainer, animatedText);
 }
 
 function updateTimer(timeLeft) {
