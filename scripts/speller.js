@@ -2,7 +2,9 @@ import words from './words.js';
 
 const amrapDiv = document.querySelector('.stripes .content-div');
 const emomDiv = document.querySelector('.polka-dots .content-div');
-const emomButton = document.querySelector('button');
+const emomButton = document.querySelector('.btn');
+const clockEl = document.querySelector('.clock');
+const emomSubheader = document.querySelector('.emom-subheader');
 
 // declare globals -------------------------
 let currentAmrapWord, currentEmomWord;
@@ -137,13 +139,28 @@ function updateTimer(timeLeft) {
 }
 
 function startEmom() {
+    // initialize exercise count
+    let count = 1;
+
     emomButton.style.display = 'none';
+    clockEl.classList.add('on');
+    clockEl.style.color = 'transparent';
+    emomSubheader.innerHTML = `<p>exercise <span class="counter">${count}</span> of 12</p>`;
 
     // change content for children 3 & 4 of container element
     updateContent(emomDiv, 3, 4, 'emom');
+    // update exercise count after first updateContent call
+    count++;
 
     // display each new word every five seconds
-    let emom = setInterval(() => updateContent(emomDiv, 3, 4, 'emom'), 5000);
+    let emom = setInterval(() => {
+        const counterSpan = document.querySelector('.counter');
+        updateContent(emomDiv, 3, 4, 'emom');
+        // dynamically set exercise count
+        counterSpan.textContent = count;
+        // update count after every 5-second interval
+        count++;
+    }, 5000);
 
     // set one-minute timer for EMOM
     setTimeout(() => {
@@ -151,6 +168,9 @@ function startEmom() {
         emomDiv.children[3].style.display = 'none';
         emomDiv.children[4].style.display = 'none';
         emomButton.style.display = 'inline-block';
+        clockEl.style.color = 'black';
+        clockEl.classList.remove('on');
+        emomSubheader.innerHTML = '<p class="emom-subheader">every minute on the minute</p>';
     }, 60000);
 }
 

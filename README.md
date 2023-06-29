@@ -159,6 +159,8 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
          9. `startEmom`
             + This is the `click` event handler for the EMOM *start* button. 
             + Sets up a timer using `setTimeout` to display a new ASL word and caption every five seconds--using `setInterval` to call `updateContent`--for one minute.
+            + The `on` class is added to the `<span>`--nested in the "emom" `<h3>` header--that wraps the letter 'O'. This class applies the `clock` keyframe animation--defined in **`level2.css`**--to the letter 'O'. The `clock` animation timing scheme (12 five-second repetitions) matches the rate at which the word changes (controlled by `setInterval`).
+            + The `count` variable keeps track of all word updates. It is incremented by one after each 5-second interval--until it reaches 12, the final interval within the minute. The subheader text updates according to the new `count` value.
          10. `startAmrap`
              + This function calls: 
                1. `updateContent` - to generate a new ASL word and caption every 20 seconds (20,000ms) using an outer recursive `setInterval`--which is given an ID of `startAmrapID`.

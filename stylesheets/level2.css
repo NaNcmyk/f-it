@@ -1,3 +1,8 @@
+:root {
+    --bg-clr: black;
+    --slice-clr: yellow;
+}
+
 .triangle a[data-link="level2"] {
     color: yellow;
     cursor: none;
@@ -13,12 +18,17 @@
     padding: 0;
 }
 
-.content-div i {
+.content-div p.emom-subheader {
+    margin-top: 0.4rem;
+}
+
+.content-div i,
+.content-div>p>.timer,
+.content-div>p>.counter {
     background-color: yellow;
 }
 
 .content-div>p>.timer {
-    background-color: yellow;
     font-family: 'Press Start 2P', monospace;
 }
 
@@ -35,8 +45,20 @@
     border: 3px #000 solid;
 }
 
-.btn:focus {
+.content-div .btn:focus {
     outline: none;
+}
+
+.content-div .clock {
+    transform: scale(0);
+    border-radius: 50%;
+}
+
+.content-div .clock.on {
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+    font-size: 3.2rem;
+    animation: clock 5s 12;
 }
 
 .word-container {
@@ -52,6 +74,7 @@
     width: 80px;
 }
 
+/* ANIMATION //////////////////////////// */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -69,6 +92,57 @@
         background-color: yellow;
     }
 }
+
+@keyframes clock {
+    0% {
+      background-color: var(--bg-clr);
+      transform: scale(1);
+      filter: brightness(3);
+      box-shadow: yellow 1px 1px 15px 3px;
+    }
+    16.67%{
+      transform: scale(1);
+      background: conic-gradient(
+        var(--bg-clr) 72deg 10deg,
+        var(--slice-clr) 10deg
+      );
+    }
+    33.33%{
+      transform: scale(1);
+      background: conic-gradient(
+        var(--bg-clr) 144deg 10deg,
+        var(--slice-clr) 10deg
+      );
+    }
+    50% {
+      transform: scale(1);
+      background: conic-gradient(
+        var(--bg-clr) 226deg 10deg,
+        var(--slice-clr) 10deg
+      );
+    }
+    66.67%{
+      transform: scale(1);
+      background: conic-gradient(
+        var(--bg-clr) 298deg 10deg,
+        var(--slice-clr) 10deg
+      );
+    }
+    83.33%{
+      transform: scale(1);
+      background: conic-gradient(
+        var(--bg-clr) 298deg 10deg,
+        var(--slice-clr) 10deg
+      );
+    }
+    100% {
+      transform: scale(1);
+      background: conic-gradient(
+        var(--bg-clr) 360deg 10deg,
+        var(--slice-clr) 10deg
+      );
+    }
+  }
 
 /* -----------------media queries----------------- */
 @media (max-width: 1060px) {
