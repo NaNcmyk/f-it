@@ -22,3 +22,7 @@
 .heading-container img:active {
     transform: scale(1);
 }
+
+.content-blob .content-div h3:not(.fast) {
+    margin-bottom: 0;
+}
