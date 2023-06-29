@@ -24,7 +24,7 @@
 
 .content-div i,
 .content-div>p>.timer,
-.content-div>p>.counter {
+.content-div span.counter {
     background-color: yellow;
 }
 
