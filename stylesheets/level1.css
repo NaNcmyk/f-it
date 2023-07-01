@@ -61,12 +61,6 @@
 
 /* ---------------media queries---------- */
 @media (max-width: 500px) {
-    .content-div {
-        padding: 0 1em;
-        top: 18em;
-        left: 13em;
-    }
-
     .content-div p:first-child {
         font-size: 1.5rem;
     }
@@ -77,21 +71,11 @@
 }
 
 @media (max-width: 420px) {
-    .content-div {
-        left: 11em;
-    }
-
     .content-div p:first-child {
         font-size: 1.2rem;
     }
 
     .content-div #text-div p {
         font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 380px) {
-    .content-div {
-        left: 10em;
     }
 }

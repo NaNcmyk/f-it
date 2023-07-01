@@ -70,8 +70,9 @@
 }
 
 .word-container img {
-    height: 80px;
-    width: 80px;
+    height: 5rem;
+    width: 5rem;
+    flex: 1;
 }
 
 /* ANIMATION //////////////////////////// */
@@ -98,7 +99,7 @@
       background-color: var(--bg-clr);
       transform: scale(1);
       filter: brightness(3);
-      box-shadow: yellow 1px 1px 15px 3px;
+      box-shadow: var(--slice-clr) 1px 1px 15px 3px;
     }
     16.67%{
       transform: scale(1);
@@ -145,24 +146,24 @@
   }
 
 /* -----------------media queries----------------- */
-@media (max-width: 1060px) {
+@media (max-width: 950px) {
     .word-container img {
-        height: 60px;
-        width: 60px;
-    }
-}
-
-@media (max-width: 810px) {
-    .word-container img {
-        height: 40px;
-        width: 40px;
+        height: 4rem;
+        width: 4rem;
     }
 }
 
 @media (max-width: 650px) {
     .word-container img {
-        height: 30px;
-        width: 30px;
+        height: 3rem;
+        width: 3rem;
+    }
+}
+
+@media (max-width: 525px) {
+    .word-container img {
+        height: 2rem;
+        width: 2rem;
     }
 }
 
@@ -181,7 +182,7 @@
         margin-top: 1rem;
     }
     .word-container img {
-        height: 25px;
-        width: 25px;
+        height: 1.5rem;
+        width: 1.5rem;
     }
 }

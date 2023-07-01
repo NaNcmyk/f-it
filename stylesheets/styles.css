@@ -1,3 +1,7 @@
+:root {
+    font-size: 16px;
+}
+
 body {
     position: relative;
     font-family: 'Press Start 2P', monospace;
@@ -27,8 +31,7 @@ body {
 }
 
 .heading-container img {
-    width: 100px;
-    height: 100px;
+    width: 7rem;
     margin: 0 1rem;
     cursor: pointer;
 }
@@ -63,7 +66,7 @@ body {
     margin: 0;
     padding: 0;
     padding-left: 1.2rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-align: left;
     font-family: 'Share Tech Mono', monospace;
 }
@@ -201,9 +204,10 @@ body {
     justify-content: space-between;
     flex-direction: column;
     top: 50%;
-    left: 47%;
+    left: 50%;
     transform: translate(-50%, -50%);
     min-width: 300px;
+    padding: 0 1em;
 }
 
 .content-div h3 {
@@ -245,7 +249,7 @@ body {
 }
 
 /* ------------- media queries ------------- */
-@media (max-width: 1060px) {
+@media (max-width: 1300px) {
     .triangle {
         border-width: 30rem 10rem 0 10rem;
     }
@@ -264,14 +268,13 @@ body {
     }
 }
 
-@media (max-width: 810px) {
+@media (max-width: 900px) {
     .heading-container {
         padding: 2rem 0 2rem 1rem;
     }
 
     .heading-container img {
-        width: 60px;
-        height: 60px;
+        width: 6rem;
         margin-left: 0;
     }
 
@@ -284,7 +287,7 @@ body {
     }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 850px) {
     .triangle {
         border-width: 18rem 10rem 0 10rem;
     }
@@ -308,6 +311,10 @@ body {
 }
 
 @media (max-width: 450px) {
+    .heading-container img {
+        width: 4rem;
+    }
+
     .triangle {
         border-width: 16rem 8rem 0 8rem;
     }
@@ -341,5 +348,4 @@ body {
     .content-div img[alt="power finger"] {
         transform: rotate(60deg);
     }
-
 }
