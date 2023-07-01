@@ -22,10 +22,11 @@ _Disclaimer: The information provided herein should not be used for diagnosing o
 HTML, CSS, Javascript, Bootstrap
 
 Key JS Topics:  
-✅ `DOM `events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`  
+✅ `DOM` events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`  
 ✅ `KeyboardEvent` properties: `key` & `code`  
 ✅ `setTimeout` / `clearTimeout`  
 ✅ `setInterval` / `clearInterval`  
+✅ Web Animations API - `Element.animate()` method
 
 ---
 
@@ -80,13 +81,25 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 
 <br>
 
-2. 📂 *scripts* (8 *.js* files): 
+2. 📂 *scripts* (9 *.js* files): 
    + 🤖 `alphabet.js` - used by `level1.html` 
       + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
       + `updateContent` is the `keydown` event handler. 
       + A non-alphabetic (invalid) event key will immediately terminate execution of `updateContent`. ⚠️ *Check console for log of invalid key.*
       + Once non-alphabetic keys have been ruled out as event triggers, in order to match the `key` case insensitively--in case user's caps lock is on--the `toLowerCase()` method is used on the event `key` string to force it to be lowercase--to match the file name--a lowercase alphabet--of the corresponding ASL `.svg` (i.e., the new content). 💡*Uncomment the two `console.log`s for more details.*
       + The `Popover.js` & `bootstrap.min.js` scripts are also included in `level1.html` to use Bootstrap's tooltips. Each tooltip contains the corresponding letter to each displayed ASL alphabet image, on hover over the image.  
+   + 🤖 `blurBabyBlur.js` - used by `level2.html` & `speller.js`  
+      + This script is responsible for the smoke effect animation, for the *EMOM* section of `level2.html`.
+      + Contains two functions:
+         1. `blurBabyBlur`
+            + `element` parameter - an HTML element 
+            + The `.animate()` method is added to the `element` to dynamically change the keyframe property values for its `animation` property--without having to hard code different variations of the same animation in `CSS`, for different elements.
+            + This function allows us to easily manipulate the `transform` property values (`translate3d`, `rotate3d`, and `scale`) of the animation's final keyframe for different HTML elements, using random values returned from `getRandomInteger`.
+         2. `getRandomInteger` 
+            + This is a helper function for `blurBabyBlur`.
+            + Returns a random integer based on a specified range. Accepts two arguments:
+               + the min (inclusive) value within the range
+               + the max (inclusive) value within the range
    + 🤖 `copyright.js` - used by all 4 *.html* files
       + Programmatically generates the copyright year and footer text.   
    + 🤖 `highFive.js` - used by all pages except the homepage
@@ -94,7 +107,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
       + The `Popover.js` & `bootstrap.min.js` scripts are included in `level1.html`, `level2.html`, and `level3.html` to create the Bootstrap "HIGH FIVE!" tooltip that displays on hover over the logo, when it turns into an open palm ✋. 
       + When the user moves the pointer (hand) cursor into the logo, and then clicks on it, it should resemble a--clap your hands, say yeah!--high five 👏 when the hands meet.
    + 🤖 `speller.js` - used by `level2.html`
-      + Note the `type="module"` in the `<script>` tag to import the `words` array.
+      + Note the `type="module"` in the `<script>` tag to import the `words` array and `blurBabyBlur` function.
       + This script contains 12 functions:  
          1. `getRandomInteger`
             + This is a helper function for `checkWord`.
@@ -161,6 +174,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
             + Sets up a timer using `setTimeout` to display a new ASL word and caption every five seconds--using `setInterval` to call `updateContent`--for one minute.
             + The `on` class is added to the `<span>`--nested in the "emom" `<h3>` header--that wraps the letter 'O'. This class applies the `clock` keyframe animation--defined in **`level2.css`**--to the letter 'O'. The `clock` animation timing scheme (12 five-second repetitions) matches the rate at which the word changes (controlled by `setInterval`).
             + The `count` variable keeps track of all word updates. It is incremented by one after each 5-second interval--until it reaches 12, the final interval within the minute. The subheader text updates according to the new `count` value.
+            + 0.5 seconds before the `setTimeout` kicks in to reset the content back to its initial state, the content of the final interval--namely, the "EMOM" heading, the "exercise 12 of 12" subheader, the ASL images, and the caption--is blurred out during transition. By delaying the content reset with a nested `setTimeout`, the `blurBabyBlur` function is able to work its "smoky" ✨animation magic✨ before the reset goes into effect (to replace the current content).
          10. `startAmrap`
              + This function calls: 
                1. `updateContent` - to generate a new ASL word and caption every 20 seconds (20,000ms) using an outer recursive `setInterval`--which is given an ID of `startAmrapID`.

@@ -1,4 +1,5 @@
 import words from './words.js';
+import blurBabyBlur from './blurBabyBlur.js';
 
 const amrapDiv = document.querySelector('.stripes .content-div');
 const emomDiv = document.querySelector('.polka-dots .content-div');
@@ -15,6 +16,7 @@ startAmrap(20000);
 
 // returns a random integer
 // based the supplied min and max range
+// min inclusive, max exclusive
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -123,7 +125,7 @@ function updateContent(containerEl, childElNum1, childElNum2, workout) {
     const text = getImgCaption(containerEl, wordArr, childElNum2);
 
     // animate content
-    const [animatedWordContainer, animatedText] = animateContent(wordContainer, text,  0.15);
+    const [animatedWordContainer, animatedText] = animateContent(wordContainer, text, 0.15);
 
     // add animated word container and caption to DOM
     containerEl.append(animatedWordContainer, animatedText);
@@ -165,12 +167,22 @@ function startEmom() {
     // set one-minute timer for EMOM
     setTimeout(() => {
         clearInterval(emom);
-        emomDiv.children[3].style.display = 'none';
-        emomDiv.children[4].style.display = 'none';
-        emomButton.style.display = 'inline-block';
-        clockEl.style.color = 'black';
-        clockEl.classList.remove('on');
-        emomSubheader.innerHTML = '<p class="emom-subheader">every minute on the minute</p>';
+
+        // add blur animation to each element within content div: all direct children + grandchildren
+        const allDescendants = emomDiv.querySelectorAll('*');
+        allDescendants.forEach(childEl => blurBabyBlur(childEl));
+
+        // wait 0.5 seconds before unsetting style changes
+        // to allow blur animation to run before content change
+        setTimeout(() => {
+            emomDiv.children[3].style.display = 'none';
+            emomDiv.children[4].style.display = 'none';
+            emomButton.style.display = 'inline-block';
+            clockEl.style.color = 'black';
+            clockEl.classList.remove('on');
+            emomSubheader.innerHTML = '<p class="emom-subheader">every minute on the minute</p>';
+        }, 500);
+
     }, 60000);
 }
 
