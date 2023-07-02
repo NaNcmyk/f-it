@@ -14,6 +14,8 @@
 
 <br>
 
+![emom demo](emom.gif)
+
 This is the at-home physical therapy and meditation retreat (all rolled into one!) you never knew you needed 😉. Ever wish you could just snap your fingers and all the pesky bugs 🐛🪲 in your code would ✨*whoosh*✨, just like that, vanish into thin air? 🤨🤞 Problem solved! Dear programming friends, the solution is right at your fingertips. Literally. To get that SaaS in your snap, you just need more finger strength 💪. (Some knowledge of [American Sign Language](https://www.nidcd.nih.gov/health/american-sign-language) is helpful, but not required.)
 
 _Disclaimer: The information provided herein should not be used for diagnosing or treating a health problem or disease. Always seek the advice of a qualified IT professional or a more experienced software engineer regarding bug-infested code--not to be confused with the creepy-crawly variety. Otherwise, consult Pest Control._
@@ -32,7 +34,6 @@ Key JS Topics:
 ---
 
 ### **RULES OF ENGAGEMENT**
-
 *F-it* is a [CrossFit](https://www.crossfit.com/what-is-crossfit/)-inspired finger workout, using American Sign Language (ASL). Live demo the app [here](https://f-it-rouge.vercel.app/).
 
 Good luck. You got this ⌨️💪.
@@ -68,7 +69,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
     + *level1.html*
     + *level2.html*
     + *level3.html*
-2. _README.md_ & _tomorrow.gif_ (from [GIPHY](https://giphy.com/gifs/tomorrow-mFz5kzbDKtwha) by [Memes](https://memes.com/), used in _README.md_)
+2. _README.md_ and its two accompanying images: _tomorrow.gif_ (from [GIPHY](https://giphy.com/gifs/tomorrow-mFz5kzbDKtwha) by [Memes](https://memes.com/)) & _emom.gif_
 
 <br>
 
