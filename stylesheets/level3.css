@@ -53,6 +53,14 @@
 }
 
 /* media queries ------------------------- */
+@media (max-width: 580px) {
+    #player1>iframe,
+    #player2>iframe {
+        width: 24em;
+        height: 12em;
+    }
+}
+
 @media (min-width: 800px) {
     #player1>iframe,
     #player2>iframe {

@@ -304,7 +304,7 @@ body {
     }
 
     .triangle .nav-link-container {
-        top: 28%;
+        top: 26%;
         right: 3%;
     }
 
@@ -327,11 +327,11 @@ body {
     }
 
     .triangle {
-        border-width: 16rem 8rem 0 8rem;
+        border-width: 20rem 8rem 0 8rem;
     }
 
     .triangle .nav-link-container {
-        top: 26%;
+        top: 22%;
         right: -2%;
     }
 
