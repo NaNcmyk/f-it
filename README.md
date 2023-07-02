@@ -22,11 +22,12 @@ _Disclaimer: The information provided herein should not be used for diagnosing o
 HTML, CSS, Javascript, Bootstrap
 
 Key JS Topics:  
-✅ `DOM` events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`  
+✅ `DOM` events - `load`, `keydown`, `click`, `visibilitychange`, `mouseover`, `mouseleave`, `scroll`  
 ✅ `KeyboardEvent` properties: `key` & `code`  
 ✅ `setTimeout` / `clearTimeout`  
 ✅ `setInterval` / `clearInterval`  
-✅ Web Animations API - `Element.animate()` method
+✅ Web Animations API - `Element.animate()` method  
+✅ `Element.getBoundingClientRect()` method vis-à-vis scrolling
 
 ---
 
@@ -81,7 +82,7 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
 
 <br>
 
-2. 📂 *scripts* (9 *.js* files): 
+2. 📂 *scripts* (10 *.js* files): 
    + 🤖 `alphabet.js` - used by `level1.html` 
       + Listens for `keydown` events, and changes the page's content according to event key (i.e., the keyboard key that corresponds to one of the 26 letters of the alphabet).
       + `updateContent` is the `keydown` event handler. 
@@ -193,13 +194,15 @@ Otherwise, if not, take a breather. Get some fresh air. Eat some good food. Slee
                + When the page's `visibilityState` is back to `visible`--e.g., user returns to the page after minimizing the browser window or to the tab containing the page after switching tabs--`restartAmrap` is called to restart `startAmrap`'s `setInterval` functions--to "reawaken" the page.
                   + Note, this is different from a page reload, in which case the page's entire state--including memory of all its `visibilitychange` events--is completely "destroyed". Hitting the browser's refresh button or returning to the page after navigating away from it via the back button or an internal page link automatically triggers a call to `startAmrap` (based on a `load` event)--not `restartAmrap` (based on a `visibilitychange` event)--to restore the page anew, back to its initial state, pre-`visibilitychange`.
    + 🤖 `swirl.js` - used by `index.html`
-      + Controls the swirl animation when homepage loads.   
+      + Controls the swirl animation triggered on page load.   
    + 🤖 `video.js` - used by `level3.html`
       + This is the `click` event handler for the two *watch live demo* buttons. 
       + The lightbox overlay containing the YouTube `<iframe>` and "follow along" text are displayed on button click.
       + The YouTube embed has been configured to autoplay on load and loop continuously--until the user pauses the video or exits lightbox.
       + An `eventListener` has also been added to the lightbox `<div>` element to distinguish between clicks on itself and those on its children. Clicking anywhere on the lightbox--except on the video or "follow along" text--triggers it to close and returns the user to the main *level3.html* page. Video will also stop if it was playing when user exits lightbox.
       + A grayscale filter has been applied over the lighbox content to match the app's black-and-white color scheme.
+   + 🤖 `wiggle.js` - used by all 4 *.html* files
+      + Animates the blobby shapes by listening for `scroll` events on the page.
    + 🤖 `words.js` - used by `level1.html`, `level2.html`, and `speller.js`
       + Note the `type="module"` in the `<script>` tag to export the `words` array.
       + This script dynamically generates the text content for each `<b>` tag in `level1.html` based on the `words` array--which, as a result, overrides the hardcoded words in the markup.
